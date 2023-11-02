@@ -12,7 +12,6 @@ public interface LibroServiceI {
 
     Optional<Libro> consultarLibroPorTitulo(String titulo);
 
-    Libro guardarLibro(Libro libro);
 
     String eliminarLibro(String id);
 

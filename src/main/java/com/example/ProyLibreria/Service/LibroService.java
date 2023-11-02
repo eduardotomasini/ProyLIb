@@ -16,19 +16,25 @@ public class LibroService implements LibroServiceI {
 
     @Override
     public Libro actualizarLibro(String id, Libro libroR) {
-        Libro libro = libroRepository.findById(id).orElseThrow(null);
 
-        libro.setIsbn(libroR.getIsbn());
-        libro.setTitulo(libroR.getTitulo());
-        libro.setAnio(libroR.getAnio());
-        libro.setEjemplares(libroR.getEjemplares());
-        libro.setEjemplaresPrestados(libroR.getEjemplaresPrestados());
-        libro.setEjemplaresRestantes(libroR.getEjemplaresRestantes());
-        libro.setAlta(libroR.getAlta());
-        libro.setAutor(libroR.getAutor());
-        libro.setEditorial(libroR.getEditorial());
+        try {
+            Libro libro = libroRepository.findById(id).orElseThrow(null);
 
-        return libro;
+            libro.setIsbn(libroR.getIsbn());
+            libro.setTitulo(libroR.getTitulo());
+            libro.setAnio(libroR.getAnio());
+            libro.setEjemplares(libroR.getEjemplares());
+            libro.setEjemplaresPrestados(libroR.getEjemplaresPrestados());
+            libro.setEjemplaresRestantes(libroR.getEjemplaresRestantes());
+            libro.setAlta(libroR.getAlta());
+            libro.setAutor(libroR.getAutor());
+            libro.setEditorial(libroR.getEditorial());
+
+            return libroRepository.save(libro);
+        } catch (Exception e) {
+            throw new RuntimeException("Libro mal actualizado");
+        }
+
 
     }
 
@@ -38,10 +44,6 @@ public class LibroService implements LibroServiceI {
         return libroRepository.findByTitulo(titulo);
     }
 
-    @Override
-    public Libro guardarLibro(Libro libro) {
-        return libroRepository.save(libro);
-    }
 
 
     @Override

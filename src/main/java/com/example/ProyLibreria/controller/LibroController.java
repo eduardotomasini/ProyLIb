@@ -13,21 +13,17 @@ import java.util.Optional;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/libros")
-public class LibroController {
+public class LibroController{
 
     private final LibroService libroService;
 
 
-    @PostMapping("/guardar")
-    public ResponseEntity<Libro> guardarLibro(@RequestBody Libro libro) {
-        try {
-            Libro mensaje = libroService.guardarLibro(libro);
-            return new ResponseEntity<>(mensaje, HttpStatus.CREATED);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-
+    @RequestMapping("/")
+    public String home(){
+        return "inicio";
     }
+
+
 /*
     @GetMapping("/listar")
     public ResponseEntity<List<Libro>> listarLibros() {
